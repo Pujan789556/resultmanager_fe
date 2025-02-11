@@ -6,7 +6,7 @@ import { useContext } from 'react';
 const Navbar = () => {
   const { logoutUser } = useContext(authContext);
   return (
-    <nav>
+    <nav className="navbar">
       <Link to="/">Dashboard</Link>
       <Link to="/students">Students</Link>
       <Link to="/subjects">Subjects</Link>

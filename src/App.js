@@ -5,10 +5,12 @@ import SignUp from './pages/Signup';
 import { authContext, AuthProvider } from './context/auth';
 import { useContext } from 'react';
 import { Dashboard } from './pages/Dashboard';
+import Navbar from './components/Navbar';
+import { Students } from './pages/students/Students';
 
 function ProtectedRoutes({ children }) {
   const { user } = useContext(authContext);
-  return user ? children : <Navigate to="/login" />;
+  return user ? <>{children}</> : <Navigate to="/login" />;
 }
 
 function AppRoutes() {
@@ -17,25 +19,28 @@ function AppRoutes() {
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<SignUp />} />
       <Route
-        path="/"
+        path="/*"
         element={
           <ProtectedRoutes>
-            <Dashboard />
+            <Navbar />
+            <Routes>
+              <Route path="dashboard" element={<Dashboard />} />
+              <Route path="students" element={<Students />} />
+            </Routes>
           </ProtectedRoutes>
         }
       />
     </Routes>
   );
 }
+
 function App() {
   return (
-    <>
-      <BrowserRouter>
-        <AuthProvider>
-          <AppRoutes />
-        </AuthProvider>
-      </BrowserRouter>
-    </>
+    <BrowserRouter>
+      <AuthProvider>
+        <AppRoutes />
+      </AuthProvider>
+    </BrowserRouter>
   );
 }
 

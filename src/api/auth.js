@@ -17,7 +17,6 @@ export const login = async (loginData) => {
     const response = await Api.post(`auth/login`, loginData, {
       headers: { 'Content-Type': 'application/json' },
     });
-    alert(response.data.message); // Success message
     return response.data;
   } catch (error) {
     alert(error.response?.data?.message || 'Login Failed!'); // Show API error message

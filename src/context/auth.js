@@ -5,6 +5,7 @@ export const authContext = createContext();
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   const navigate = useNavigate();
 
@@ -20,12 +21,14 @@ export function AuthProvider({ children }) {
   };
 
   useEffect(() => {
-    const user = localStorage.getItem('user');
-    if (user) {
-      setUser(JSON.parse(user));
-    } else {
-      navigate('/login');
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
     }
+    setLoading(false);
   }, []);
+  if (loading) {
+    return <div>Loading...</div>;
+  }
   return <authContext.Provider value={{ user, loginUser, logoutUser }}> {children}</authContext.Provider>;
 }
