@@ -30,7 +30,7 @@ export default function StudentForm({ onStudentAdded }) {
       <label>Roll No:</label>
       <input type="number" name="rollNo" onChange={handleChange} required />
 
-      <label>Semester:</label>
+      <label>Semesters:</label>
       <select name="semester" onChange={handleChange}>
         {['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII'].map((sem) => (
           <option value={sem}>{sem}</option>
